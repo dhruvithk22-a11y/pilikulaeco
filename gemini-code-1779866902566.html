@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pilikula Galaxy Hub</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() { emailjs.init({ publicKey: "vKZwuMFJXqXLJdS7T" }); })();
+    </script>
+    <style>
+        /* ವರ್ಣರಂಜಿತ ಗ್ಯಾಲಕ್ಸಿ ಗ್ರೇಡಿಯಂಟ್ ಹಿನ್ನೆಲೆ */
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: 40px;
+            border-radius: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            text-align: center;
+            width: 350px;
+            transition: transform 0.3s;
+        }
+
+        .card:hover { transform: scale(1.02); }
+
+        h2 { margin-bottom: 25px; background: linear-gradient(to right, #00d2ff, #9d50bb); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 15px;
+            border: none;
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            margin-top: 20px;
+            background: linear-gradient(45deg, #00d2ff, #9d50bb);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: linear-gradient(45deg, #9d50bb, #00d2ff);
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2>Pilikula Galaxy Hub</h2>
+        <form id="booking-form">
+            <input type="text" id="user_name" placeholder="Enter Your Name" required>
+            <input type="email" id="user_email" placeholder="Enter Your Email" required>
+            <button type="submit" id="send-btn">Confirm Cosmic Journey</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('booking-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('send-btn');
+            btn.innerText = 'Dispatching...';
+
+            const templateParams = {
+                to_email: document.getElementById('user_email').value,
+                name: document.getElementById('user_name').value,
+                message: "Your space journey is ready! Welcome to Pilikula Planetarium."
+            };
+
+            emailjs.send("service_mic6bra", "template_5wslqb8", templateParams)
+                .then(() => {
+                    alert("Success! Your journey is booked.");
+                    btn.innerText = 'Confirm Cosmic Journey';
+                }, (err) => {
+                    alert("Error: " + JSON.stringify(err));
+                    btn.innerText = 'Confirm Cosmic Journey';
+                });
+        });
+    </script>
+</body>
+</html>
